@@ -1,353 +1,414 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Soft Logs Global</title>
 
-  <title>Soft Logs Global</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-    }
+body{
+  background:#070b16;
+  color:#fff;
+  min-height:100vh
+}
 
-    body {
-      background: #080b18;
-      color: white;
-      min-height: 100vh;
-    }
+header{
+  background:#0d1324;
+  padding:16px 6%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border-bottom:1px solid #202a45
+}
 
-    header {
-      background: #10152b;
-      padding: 18px 6%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid #252b4d;
-    }
+.logo{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-size:20px;
+  font-weight:bold
+}
 
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 21px;
-      font-weight: bold;
-    }
+.logo-icon{
+  width:42px;
+  height:42px;
+  border-radius:12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:linear-gradient(135deg,#00d4ff,#7c3aed);
+  font-size:20px
+}
 
-    .logo-icon {
-      width: 42px;
-      height: 42px;
-      border-radius: 12px;
-      background: linear-gradient(135deg, #00d4ff, #7c3aed);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
-      font-size: 20px;
-    }
+nav button{
+  background:none;
+  color:#fff;
+  border:0;
+  margin-left:12px;
+  cursor:pointer
+}
 
-    nav button {
-      background: none;
-      border: none;
-      color: white;
-      margin-left: 15px;
-      cursor: pointer;
-      font-size: 14px;
-    }
+.hero{
+  text-align:center;
+  padding:85px 6%;
+  background:radial-gradient(circle at top,#192652,#070b16 65%)
+}
 
-    .hero {
-      padding: 80px 6%;
-      text-align: center;
-      background:
-        radial-gradient(circle at top, #18204a, #080b18 60%);
-    }
+.hero h1{
+  font-size:45px;
+  margin-bottom:18px
+}
 
-    .hero h1 {
-      font-size: 45px;
-      margin-bottom: 18px;
-    }
+.hero h1 span{color:#00d4ff}
 
-    .hero h1 span {
-      color: #00d4ff;
-    }
+.hero p{
+  max-width:650px;
+  margin:auto;
+  color:#aeb7d0;
+  line-height:1.7
+}
 
-    .hero p {
-      max-width: 650px;
-      margin: auto;
-      color: #b7bdd6;
-      line-height: 1.7;
-      font-size: 17px;
-    }
+.btn{
+  padding:13px 22px;
+  border-radius:10px;
+  border:0;
+  cursor:pointer;
+  font-weight:bold;
+  margin:6px
+}
 
-    .buttons {
-      margin-top: 30px;
-    }
+.primary{
+  background:linear-gradient(135deg,#00d4ff,#7c3aed);
+  color:#fff
+}
 
-    .btn {
-      padding: 14px 24px;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      margin: 6px;
-      font-weight: bold;
-      font-size: 15px;
-    }
+.secondary{
+  background:#151c31;
+  color:#fff;
+  border:1px solid #303b60
+}
 
-    .primary {
-      background: linear-gradient(135deg, #00d4ff, #7c3aed);
-      color: white;
-    }
+.services{
+  padding:55px 6%
+}
 
-    .secondary {
-      background: #171d38;
-      color: white;
-      border: 1px solid #343b63;
-    }
+.services h2{
+  text-align:center;
+  margin-bottom:30px
+}
 
-    .services {
-      padding: 55px 6%;
-    }
+.cards{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+  gap:18px
+}
 
-    .services h2 {
-      text-align: center;
-      margin-bottom: 30px;
-    }
+.card,.dash-card{
+  background:#0f1629;
+  border:1px solid #202b48;
+  border-radius:16px;
+  padding:24px
+}
 
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-      gap: 18px;
-    }
+.card p,.dash-card p{
+  color:#9da7c1;
+  margin-top:10px;
+  line-height:1.5
+}
 
-    .card {
-      background: #11162b;
-      border: 1px solid #252c4b;
-      padding: 25px;
-      border-radius: 15px;
-    }
+/* MODAL */
 
-    .card h3 {
-      margin-bottom: 10px;
-    }
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.78);
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  z-index:20
+}
 
-    .card p {
-      color: #9da5c4;
-      line-height: 1.5;
-      font-size: 14px;
-    }
+.modal-box{
+  width:100%;
+  max-width:420px;
+  background:#10172b;
+  padding:30px;
+  border-radius:18px;
+  border:1px solid #303b60;
+  position:relative
+}
 
-    .modal {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,.75);
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      z-index: 10;
-    }
+.close{
+  position:absolute;
+  right:20px;
+  top:15px;
+  font-size:25px;
+  cursor:pointer;
+  color:#aaa
+}
 
-    .modal-box {
-      width: 100%;
-      max-width: 430px;
-      background: #11162b;
-      border: 1px solid #30385e;
-      border-radius: 18px;
-      padding: 30px;
-      position: relative;
-    }
+input,select{
+  width:100%;
+  padding:14px;
+  margin:7px 0;
+  background:#080d1b;
+  color:#fff;
+  border:1px solid #303b60;
+  border-radius:9px;
+  outline:none
+}
 
-    .modal-box h2 {
-      margin-bottom: 20px;
-    }
+.form-btn{
+  width:100%;
+  margin:10px 0
+}
 
-    .close {
-      position: absolute;
-      right: 20px;
-      top: 15px;
-      font-size: 25px;
-      cursor: pointer;
-      color: #aaa;
-    }
+.switch{
+  text-align:center;
+  color:#9da7c1;
+  margin-top:15px;
+  font-size:14px
+}
 
-    input, select {
-      width: 100%;
-      padding: 14px;
-      margin: 8px 0;
-      border-radius: 9px;
-      border: 1px solid #343b60;
-      background: #080b18;
-      color: white;
-      outline: none;
-    }
+.switch span{
+  color:#00d4ff;
+  cursor:pointer
+}
 
-    .form-btn {
-      width: 100%;
-      margin-top: 12px;
-    }
+/* DASHBOARD */
 
-    .switch {
-      text-align: center;
-      margin-top: 18px;
-      color: #aab1cc;
-      font-size: 14px;
-    }
+#dashboard{
+  display:none;
+  min-height:100vh
+}
 
-    .switch span {
-      color: #00d4ff;
-      cursor: pointer;
-    }
+.dashboard{
+  display:flex;
+  min-height:100vh
+}
 
-    #dashboard {
-      display: none;
-      padding: 40px 6%;
-    }
+.sidebar{
+  width:240px;
+  background:#0c1222;
+  border-right:1px solid #202a45;
+  padding:25px 15px
+}
 
-    .dashboard-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 30px;
-      gap: 15px;
-      flex-wrap: wrap;
-    }
+.sidebar h2{
+  margin-bottom:25px;
+  padding-left:10px
+}
 
-    .welcome {
-      color: #aab1cc;
-      margin-top: 6px;
-    }
+.side-btn{
+  width:100%;
+  background:none;
+  color:#aeb7d0;
+  border:0;
+  padding:14px;
+  text-align:left;
+  border-radius:9px;
+  cursor:pointer;
+  margin-bottom:5px
+}
 
-    .dashboard-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 18px;
-    }
+.side-btn:hover{
+  background:#151d34;
+  color:#fff
+}
 
-    .dash-card {
-      background: #11162b;
-      border: 1px solid #292f51;
-      border-radius: 15px;
-      padding: 25px;
-    }
+.main{
+  flex:1;
+  padding:30px
+}
 
-    .dash-card h3 {
-      margin-bottom: 12px;
-    }
+.topbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  margin-bottom:30px
+}
 
-    .converter {
-      margin-top: 25px;
-      background: #11162b;
-      border: 1px solid #292f51;
-      padding: 25px;
-      border-radius: 15px;
-      max-width: 600px;
-    }
+.welcome{
+  color:#9da7c1;
+  margin-top:7px
+}
 
-    #result {
-      margin-top: 15px;
-      color: #00d4ff;
-      font-size: 18px;
-      font-weight: bold;
-    }
+.dashboard-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
+  gap:18px
+}
 
-    footer {
-      text-align: center;
-      padding: 30px;
-      color: #737b9d;
-      border-top: 1px solid #202643;
-      margin-top: 40px;
-    }
+.balance{
+  font-size:27px;
+  font-weight:bold;
+  color:#00d4ff;
+  margin-top:12px
+}
 
-    @media (max-width: 600px) {
-      .hero h1 {
-        font-size: 34px;
-      }
+.section{
+  display:none;
+  margin-top:25px
+}
 
-      header {
-        padding: 15px 4%;
-      }
+.section.active{
+  display:block
+}
 
-      nav button {
-        margin-left: 5px;
-      }
-    }
-  </style>
+.section-box{
+  background:#0f1629;
+  border:1px solid #202b48;
+  border-radius:16px;
+  padding:25px;
+  margin-bottom:18px
+}
+
+.service-buttons{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+  gap:12px;
+  margin-top:18px
+}
+
+.service-btn{
+  padding:20px;
+  background:#141c32;
+  border:1px solid #293655;
+  border-radius:12px;
+  color:#fff;
+  cursor:pointer;
+  text-align:left
+}
+
+.service-btn:hover{
+  border-color:#00d4ff
+}
+
+.transaction{
+  padding:15px 0;
+  border-bottom:1px solid #222d48;
+  color:#aeb7d0
+}
+
+footer{
+  text-align:center;
+  padding:30px;
+  color:#69748f;
+  border-top:1px solid #202a45
+}
+
+@media(max-width:700px){
+
+  .hero h1{font-size:34px}
+
+  .dashboard{
+    display:block
+  }
+
+  .sidebar{
+    width:100%;
+    border-right:0;
+    border-bottom:1px solid #202a45
+  }
+
+  .sidebar h2{
+    text-align:center
+  }
+
+  .side-btn{
+    display:inline-block;
+    width:auto;
+    margin:3px
+  }
+
+  .main{
+    padding:20px
+  }
+
+  .topbar{
+    align-items:flex-start;
+    flex-direction:column
+  }
+}
+</style>
 </head>
 
 <body>
 
-<header>
+<!-- HEADER -->
+
+<header id="mainHeader">
+
   <div class="logo">
     <div class="logo-icon">S</div>
-    <span>Soft Logs Global</span>
+    Soft Logs Global
   </div>
 
   <nav>
     <button onclick="openModal('login')">Login</button>
     <button onclick="openModal('signup')">Create Account</button>
   </nav>
+
 </header>
 
 
-<!-- FRONT PAGE -->
+<!-- HOME -->
+
 <section id="home">
 
   <section class="hero">
-    <h1>Welcome to <span>Soft Logs Global</span></h1>
+
+    <h1>
+      Welcome to <span>Soft Logs Global</span>
+    </h1>
 
     <p>
-      Your digital services platform for simple, reliable and convenient
-      services across Nigeria and beyond.
+      Your digital services platform for convenient,
+      reliable and accessible services across Nigeria
+      and beyond.
     </p>
 
-    <div class="buttons">
-      <button class="btn primary" onclick="openModal('signup')">
-        Create Account
-      </button>
+    <br>
 
-      <button class="btn secondary" onclick="openModal('login')">
-        Customer Login
-      </button>
-    </div>
+    <button class="btn primary" onclick="openModal('signup')">
+      Create Customer Account
+    </button>
+
+    <button class="btn secondary" onclick="openModal('login')">
+      Customer Login
+    </button>
+
   </section>
 
 
   <section class="services">
 
-    <h2>Our Services</h2>
+    <h2>Explore Our Services</h2>
 
     <div class="cards">
 
       <div class="card">
         <h3>💳 Digital Services</h3>
-        <p>
-          Access useful digital services from one convenient platform.
-        </p>
+        <p>Access useful digital services from one platform.</p>
       </div>
 
       <div class="card">
-        <h3>💱 Currency Conversion</h3>
-        <p>
-          Convert Nigerian Naira to different international currencies.
-        </p>
+        <h3>💱 Currency Exchange</h3>
+        <p>Convert Nigerian Naira into international currencies.</p>
       </div>
 
       <div class="card">
         <h3>🌍 Global Services</h3>
-        <p>
-          Explore services designed for customers in Nigeria and other
-          countries.
-        </p>
+        <p>Services designed for customers locally and globally.</p>
       </div>
 
       <div class="card">
-        <h3>👤 Customer Account</h3>
-        <p>
-          Create your account and manage your services from your dashboard.
-        </p>
+        <h3>👤 Customer Portal</h3>
+        <p>Create an account and manage your services.</p>
       </div>
 
     </div>
@@ -357,40 +418,34 @@
 </section>
 
 
-<!-- SIGNUP / LOGIN MODAL -->
+<!-- ACCOUNT MODAL -->
+
 <div class="modal" id="accountModal">
 
   <div class="modal-box">
 
     <div class="close" onclick="closeModal()">×</div>
 
+
     <!-- SIGNUP -->
+
     <div id="signupForm">
 
-      <h2>Create Customer Account</h2>
+      <h2>Create Account</h2>
 
-      <input
-        type="text"
-        id="signupName"
-        placeholder="Full Name"
-      >
+      <br>
 
-      <input
-        type="email"
-        id="signupEmail"
-        placeholder="Email Address"
-      >
+      <input id="signupName" type="text"
+      placeholder="Full Name">
 
-      <input
-        type="password"
-        id="signupPassword"
-        placeholder="Create Password"
-      >
+      <input id="signupEmail" type="email"
+      placeholder="Email Address">
 
-      <button
-        class="btn primary form-btn"
-        onclick="createAccount()"
-      >
+      <input id="signupPassword" type="password"
+      placeholder="Create Password">
+
+      <button class="btn primary form-btn"
+      onclick="createAccount()">
         Create Account
       </button>
 
@@ -403,26 +458,21 @@
 
 
     <!-- LOGIN -->
-    <div id="loginForm" style="display:none;">
+
+    <div id="loginForm" style="display:none">
 
       <h2>Customer Login</h2>
 
-      <input
-        type="email"
-        id="loginEmail"
-        placeholder="Email Address"
-      >
+      <br>
 
-      <input
-        type="password"
-        id="loginPassword"
-        placeholder="Password"
-      >
+      <input id="loginEmail" type="email"
+      placeholder="Email Address">
 
-      <button
-        class="btn primary form-btn"
-        onclick="login()"
-      >
+      <input id="loginPassword" type="password"
+      placeholder="Password">
+
+      <button class="btn primary form-btn"
+      onclick="login()">
         Login
       </button>
 
@@ -438,280 +488,542 @@
 </div>
 
 
-<!-- CUSTOMER DASHBOARD -->
+<!-- DASHBOARD -->
+
 <section id="dashboard">
 
-  <div class="dashboard-header">
-
-    <div>
-      <h1>Customer Dashboard</h1>
-      <p class="welcome" id="welcomeUser"></p>
-    </div>
-
-    <button class="btn secondary" onclick="logout()">
-      Logout
-    </button>
-
-  </div>
+  <div class="dashboard">
 
 
-  <div class="dashboard-grid">
+    <!-- SIDEBAR -->
 
-    <div class="dash-card">
-      <h3>👤 My Account</h3>
-      <p id="accountEmail"></p>
-    </div>
+    <aside class="sidebar">
 
-    <div class="dash-card">
-      <h3>🌍 Global Services</h3>
-      <p>Explore available digital services.</p>
-    </div>
+      <h2>Soft Logs</h2>
 
-    <div class="dash-card">
-      <h3>💱 Currency Converter</h3>
-      <p>Convert currencies quickly.</p>
-    </div>
+      <button class="side-btn"
+      onclick="showSection('overview')">
+        🏠 Dashboard
+      </button>
 
-    <div class="dash-card">
-      <h3>📋 Transactions</h3>
-      <p>Your transaction history will appear here.</p>
-    </div>
+      <button class="side-btn"
+      onclick="showSection('profile')">
+        👤 My Profile
+      </button>
 
-  </div>
+      <button class="side-btn"
+      onclick="showSection('wallet')">
+        💰 Wallet
+      </button>
+
+      <button class="side-btn"
+      onclick="showSection('services')">
+        🌍 Services
+      </button>
+
+      <button class="side-btn"
+      onclick="showSection('converter')">
+        💱 Currency Converter
+      </button>
+
+      <button class="side-btn"
+      onclick="showSection('transactions')">
+        📜 Transactions
+      </button>
+
+      <button class="side-btn"
+      onclick="logout()">
+        🚪 Logout
+      </button>
+
+    </aside>
 
 
-  <!-- CONVERTER -->
-  <div class="converter">
+    <!-- MAIN -->
 
-    <h2>💱 Currency Converter</h2>
+    <main class="main">
 
-    <input
-      type="number"
-      id="nairaAmount"
-      placeholder="Enter amount in Nigerian Naira"
-    >
+      <div class="topbar">
 
-    <select id="currency">
-      <option value="0.00065">USD - US Dollar</option>
-      <option value="0.00056">EUR - Euro</option>
-      <option value="0.00048">GBP - British Pound</option>
-      <option value="0.00096">CAD - Canadian Dollar</option>
-      <option value="0.00086">AUD - Australian Dollar</option>
-    </select>
+        <div>
+          <h1 id="dashboardTitle">
+            Customer Dashboard
+          </h1>
 
-    <button
-      class="btn primary"
-      onclick="convertCurrency()"
-    >
-      Convert
-    </button>
+          <p class="welcome" id="welcomeUser"></p>
+        </div>
 
-    <div id="result"></div>
+        <button class="btn secondary"
+        onclick="logout()">
+          Logout
+        </button>
+
+      </div>
+
+
+      <!-- OVERVIEW -->
+
+      <div id="overview"
+      class="section active">
+
+        <div class="dashboard-grid">
+
+          <div class="dash-card">
+            <h3>💰 Wallet Balance</h3>
+            <div class="balance">₦0.00</div>
+            <p>Your current balance.</p>
+          </div>
+
+          <div class="dash-card">
+            <h3>📋 Transactions</h3>
+            <div class="balance">0</div>
+            <p>Total transactions.</p>
+          </div>
+
+          <div class="dash-card">
+            <h3>🌍 Services</h3>
+            <div class="balance">4</div>
+            <p>Available services.</p>
+          </div>
+
+          <div class="dash-card">
+            <h3>🔔 Notifications</h3>
+            <div class="balance">0</div>
+            <p>New notifications.</p>
+          </div>
+
+        </div>
+
+
+        <div class="section-box" style="margin-top:20px">
+
+          <h2>Quick Services</h2>
+
+          <div class="service-buttons">
+
+            <button class="service-btn"
+            onclick="showSection('converter')">
+              💱 Currency Converter
+            </button>
+
+            <button class="service-btn"
+            onclick="showSection('services')">
+              📱 Airtime & Data
+            </button>
+
+            <button class="service-btn"
+            onclick="showSection('wallet')">
+              💰 Wallet
+            </button>
+
+            <button class="service-btn"
+            onclick="showSection('transactions')">
+              📜 Transactions
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- PROFILE -->
+
+      <div id="profile" class="section">
+
+        <div class="section-box">
+
+          <h2>👤 My Profile</h2>
+
+          <br>
+
+          <p><strong>Name:</strong></p>
+          <p id="profileName"></p>
+
+          <br>
+
+          <p><strong>Email:</strong></p>
+          <p id="profileEmail"></p>
+
+        </div>
+
+      </div>
+
+
+      <!-- WALLET -->
+
+      <div id="wallet" class="section">
+
+        <div class="section-box">
+
+          <h2>💰 My Wallet</h2>
+
+          <div class="balance">₦0.00</div>
+
+          <p>
+            Your wallet balance will appear here.
+          </p>
+
+          <br>
+
+          <button class="btn primary"
+          onclick="alert('Wallet funding will be connected to the payment system later.')">
+            Fund Wallet
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- SERVICES -->
+
+      <div id="services" class="section">
+
+        <div class="section-box">
+
+          <h2>🌍 Digital Services</h2>
+
+          <div class="service-buttons">
+
+            <button class="service-btn"
+            onclick="alert('Airtime service will be connected soon.')">
+              📱 Airtime
+            </button>
+
+            <button class="service-btn"
+            onclick="alert('Data service will be connected soon.')">
+              📶 Data
+            </button>
+
+            <button class="service-btn"
+            onclick="alert('International services will be connected soon.')">
+              🌍 International Services
+            </button>
+
+            <button class="service-btn"
+            onclick="alert('Payment services will be connected soon.')">
+              💳 Payments
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- CONVERTER -->
+
+      <div id="converter" class="section">
+
+        <div class="section-box">
+
+          <h2>💱 Currency Converter</h2>
+
+          <br>
+
+          <input
+          id="nairaAmount"
+          type="number"
+          placeholder="Enter amount in Naira">
+
+          <select id="currency">
+
+            <option value="0.00065">
+              USD - US Dollar
+            </option>
+
+            <option value="0.00056">
+              EUR - Euro
+            </option>
+
+            <option value="0.00048">
+              GBP - British Pound
+            </option>
+
+            <option value="0.00096">
+              CAD - Canadian Dollar
+            </option>
+
+            <option value="0.00086">
+              AUD - Australian Dollar
+            </option>
+
+          </select>
+
+          <button class="btn primary"
+          onclick="convertCurrency()">
+            Convert
+          </button>
+
+          <h3 id="result"></h3>
+
+        </div>
+
+      </div>
+
+
+      <!-- TRANSACTIONS -->
+
+      <div id="transactions" class="section">
+
+        <div class="section-box">
+
+          <h2>📜 Transaction History</h2>
+
+          <br>
+
+          <div class="transaction">
+            No transactions yet.
+          </div>
+
+        </div>
+
+      </div>
+
+    </main>
 
   </div>
 
 </section>
 
 
-<footer>
-  © 2026 Soft Logs Global. All Rights Reserved.
+<footer id="footer">
+  © 2026 Soft Logs Global — All Rights Reserved.
 </footer>
 
 
 <script>
 
-  function openModal(type) {
+/* ACCOUNT MODAL */
 
-    document.getElementById("accountModal").style.display = "flex";
+function openModal(type){
 
-    if (type === "login") {
-      showLogin();
-    } else {
-      showSignup();
-    }
-  }
+  document.getElementById("accountModal").style.display="flex";
 
-
-  function closeModal() {
-
-    document.getElementById("accountModal").style.display = "none";
-
-  }
-
-
-  function showSignup() {
-
-    document.getElementById("signupForm").style.display = "block";
-
-    document.getElementById("loginForm").style.display = "none";
-
-  }
-
-
-  function showLogin() {
-
-    document.getElementById("signupForm").style.display = "none";
-
-    document.getElementById("loginForm").style.display = "block";
-
-  }
-
-
-  function createAccount() {
-
-    const name =
-      document.getElementById("signupName").value.trim();
-
-    const email =
-      document.getElementById("signupEmail").value.trim();
-
-    const password =
-      document.getElementById("signupPassword").value;
-
-
-    if (!name || !email || !password) {
-
-      alert("Please fill in all fields.");
-
-      return;
-    }
-
-
-    if (password.length < 6) {
-
-      alert("Password must be at least 6 characters.");
-
-      return;
-    }
-
-
-    const user = {
-
-      name: name,
-
-      email: email,
-
-      password: password
-
-    };
-
-
-    localStorage.setItem(
-      "softLogsUser",
-      JSON.stringify(user)
-    );
-
-
-    alert("Account created successfully!");
-
-
-    document.getElementById("signupName").value = "";
-
-    document.getElementById("signupEmail").value = "";
-
-    document.getElementById("signupPassword").value = "";
-
-
+  if(type==="login"){
     showLogin();
+  }else{
+    showSignup();
+  }
+
+}
+
+
+function closeModal(){
+
+  document.getElementById("accountModal").style.display="none";
+
+}
+
+
+function showSignup(){
+
+  document.getElementById("signupForm").style.display="block";
+
+  document.getElementById("loginForm").style.display="none";
+
+}
+
+
+function showLogin(){
+
+  document.getElementById("signupForm").style.display="none";
+
+  document.getElementById("loginForm").style.display="block";
+
+}
+
+
+/* CREATE ACCOUNT */
+
+function createAccount(){
+
+  const name=document.getElementById("signupName").value.trim();
+
+  const email=document.getElementById("signupEmail").value.trim();
+
+  const password=document.getElementById("signupPassword").value;
+
+
+  if(!name || !email || !password){
+
+    alert("Please fill in all fields.");
+
+    return;
 
   }
 
 
-  function login() {
+  if(password.length<6){
 
-    const email =
-      document.getElementById("loginEmail").value.trim();
+    alert("Password must contain at least 6 characters.");
 
-    const password =
-      document.getElementById("loginPassword").value;
-
-
-    const savedUser =
-      JSON.parse(localStorage.getItem("softLogsUser"));
-
-
-    if (!savedUser) {
-
-      alert("No account found. Please create an account first.");
-
-      return;
-    }
-
-
-    if (
-      email === savedUser.email &&
-      password === savedUser.password
-    ) {
-
-      closeModal();
-
-      document.getElementById("home").style.display = "none";
-
-      document.getElementById("dashboard").style.display = "block";
-
-      document.getElementById("welcomeUser").innerText =
-        "Welcome back, " + savedUser.name + "!";
-
-      document.getElementById("accountEmail").innerText =
-        savedUser.email;
-
-      window.scrollTo(0, 0);
-
-    } else {
-
-      alert("Incorrect email or password.");
-
-    }
+    return;
 
   }
 
 
-  function logout() {
+  const user={
+    name:name,
+    email:email,
+    password:password
+  };
 
-    document.getElementById("dashboard").style.display = "none";
 
-    document.getElementById("home").style.display = "block";
+  localStorage.setItem(
+    "softLogsUser",
+    JSON.stringify(user)
+  );
 
-    window.scrollTo(0, 0);
+
+  alert("Account created successfully!");
+
+  showLogin();
+
+}
+
+
+/* LOGIN */
+
+function login(){
+
+  const email=document.getElementById("loginEmail").value.trim();
+
+  const password=document.getElementById("loginPassword").value;
+
+
+  const savedUser=
+  JSON.parse(localStorage.getItem("softLogsUser"));
+
+
+  if(!savedUser){
+
+    alert("No account found. Please create an account first.");
+
+    return;
+
+  }
+
+
+  if(
+    email===savedUser.email &&
+    password===savedUser.password
+  ){
+
+    closeModal();
+
+    document.getElementById("home").style.display="none";
+
+    document.getElementById("mainHeader").style.display="none";
+
+    document.getElementById("footer").style.display="none";
+
+    document.getElementById("dashboard").style.display="block";
+
+
+    document.getElementById("welcomeUser").innerText=
+    "Welcome back, "+savedUser.name+"!";
+
+
+    document.getElementById("profileName").innerText=
+    savedUser.name;
+
+
+    document.getElementById("profileEmail").innerText=
+    savedUser.email;
+
+
+    window.scrollTo(0,0);
+
+  }else{
+
+    alert("Incorrect email or password.");
+
+  }
+
+}
+
+
+/* DASHBOARD NAVIGATION */
+
+function showSection(sectionId){
+
+  const sections=
+  document.querySelectorAll(".section");
+
+  sections.forEach(section=>{
+    section.classList.remove("active");
+  });
+
+
+  document.getElementById(sectionId)
+  .classList.add("active");
+
+
+  window.scrollTo(0,0);
+
+}
+
+
+/* LOGOUT */
+
+function logout(){
+
+  document.getElementById("dashboard").style.display="none";
+
+  document.getElementById("home").style.display="block";
+
+  document.getElementById("mainHeader").style.display="flex";
+
+  document.getElementById("footer").style.display="block";
+
+  window.scrollTo(0,0);
+
+}
+
+
+/* CURRENCY CONVERTER */
+
+function convertCurrency(){
+
+  const amount=
+  parseFloat(document.getElementById("nairaAmount").value);
+
+  const rate=
+  parseFloat(document.getElementById("currency").value);
+
+
+  const select=
+  document.getElementById("currency");
+
+  const currency=
+  select.options[select.selectedIndex]
+  .text.split(" - ")[0];
+
+
+  if(isNaN(amount)||amount<=0){
+
+    document.getElementById("result").innerText=
+    "Enter a valid amount.";
+
+    return;
 
   }
 
 
-  function convertCurrency() {
-
-    const amount =
-      parseFloat(document.getElementById("nairaAmount").value);
-
-    const rate =
-      parseFloat(document.getElementById("currency").value);
-
-    const currency =
-      document.getElementById("currency");
-
-    const currencyName =
-      currency.options[currency.selectedIndex].text.split(" - ")[0];
+  const converted=amount*rate;
 
 
-    if (isNaN(amount) || amount <= 0) {
+  document.getElementById("result").innerText=
+  "₦"+amount.toLocaleString()+
+  " ≈ "+
+  converted.toFixed(2)+
+  " "+currency;
 
-      document.getElementById("result").innerText =
-        "Please enter a valid amount.";
-
-      return;
-    }
-
-
-    const converted = amount * rate;
-
-
-    document.getElementById("result").innerText =
-      "₦" + amount.toLocaleString() +
-      " ≈ " +
-      converted.toFixed(2) +
-      " " +
-      currencyName;
-
-  }
+}
 
 </script>
 
