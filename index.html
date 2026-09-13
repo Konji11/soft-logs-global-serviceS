@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Soft Logs Global</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #080b18;
+      color: white;
+      min-height: 100vh;
+    }
+
+    header {
+      background: #10152b;
+      padding: 18px 6%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #252b4d;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 21px;
+      font-weight: bold;
+    }
+
+    .logo-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #00d4ff, #7c3aed);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 20px;
+    }
+
+    nav button {
+      background: none;
+      border: none;
+      color: white;
+      margin-left: 15px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .hero {
+      padding: 80px 6%;
+      text-align: center;
+      background:
+        radial-gradient(circle at top, #18204a, #080b18 60%);
+    }
+
+    .hero h1 {
+      font-size: 45px;
+      margin-bottom: 18px;
+    }
+
+    .hero h1 span {
+      color: #00d4ff;
+    }
+
+    .hero p {
+      max-width: 650px;
+      margin: auto;
+      color: #b7bdd6;
+      line-height: 1.7;
+      font-size: 17px;
+    }
+
+    .buttons {
+      margin-top: 30px;
+    }
+
+    .btn {
+      padding: 14px 24px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      margin: 6px;
+      font-weight: bold;
+      font-size: 15px;
+    }
+
+    .primary {
+      background: linear-gradient(135deg, #00d4ff, #7c3aed);
+      color: white;
+    }
+
+    .secondary {
+      background: #171d38;
+      color: white;
+      border: 1px solid #343b63;
+    }
+
+    .services {
+      padding: 55px 6%;
+    }
+
+    .services h2 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      background: #11162b;
+      border: 1px solid #252c4b;
+      padding: 25px;
+      border-radius: 15px;
+    }
+
+    .card h3 {
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      color: #9da5c4;
+      line-height: 1.5;
+      font-size: 14px;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.75);
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 10;
+    }
+
+    .modal-box {
+      width: 100%;
+      max-width: 430px;
+      background: #11162b;
+      border: 1px solid #30385e;
+      border-radius: 18px;
+      padding: 30px;
+      position: relative;
+    }
+
+    .modal-box h2 {
+      margin-bottom: 20px;
+    }
+
+    .close {
+      position: absolute;
+      right: 20px;
+      top: 15px;
+      font-size: 25px;
+      cursor: pointer;
+      color: #aaa;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 14px;
+      margin: 8px 0;
+      border-radius: 9px;
+      border: 1px solid #343b60;
+      background: #080b18;
+      color: white;
+      outline: none;
+    }
+
+    .form-btn {
+      width: 100%;
+      margin-top: 12px;
+    }
+
+    .switch {
+      text-align: center;
+      margin-top: 18px;
+      color: #aab1cc;
+      font-size: 14px;
+    }
+
+    .switch span {
+      color: #00d4ff;
+      cursor: pointer;
+    }
+
+    #dashboard {
+      display: none;
+      padding: 40px 6%;
+    }
+
+    .dashboard-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .welcome {
+      color: #aab1cc;
+      margin-top: 6px;
+    }
+
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+    }
+
+    .dash-card {
+      background: #11162b;
+      border: 1px solid #292f51;
+      border-radius: 15px;
+      padding: 25px;
+    }
+
+    .dash-card h3 {
+      margin-bottom: 12px;
+    }
+
+    .converter {
+      margin-top: 25px;
+      background: #11162b;
+      border: 1px solid #292f51;
+      padding: 25px;
+      border-radius: 15px;
+      max-width: 600px;
+    }
+
+    #result {
+      margin-top: 15px;
+      color: #00d4ff;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      color: #737b9d;
+      border-top: 1px solid #202643;
+      margin-top: 40px;
+    }
+
+    @media (max-width: 600px) {
+      .hero h1 {
+        font-size: 34px;
+      }
+
+      header {
+        padding: 15px 4%;
+      }
+
+      nav button {
+        margin-left: 5px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">
+    <div class="logo-icon">S</div>
+    <span>Soft Logs Global</span>
+  </div>
+
+  <nav>
+    <button onclick="openModal('login')">Login</button>
+    <button onclick="openModal('signup')">Create Account</button>
+  </nav>
+</header>
+
+
+<!-- FRONT PAGE -->
+<section id="home">
+
+  <section class="hero">
+    <h1>Welcome to <span>Soft Logs Global</span></h1>
+
+    <p>
+      Your digital services platform for simple, reliable and convenient
+      services across Nigeria and beyond.
+    </p>
+
+    <div class="buttons">
+      <button class="btn primary" onclick="openModal('signup')">
+        Create Account
+      </button>
+
+      <button class="btn secondary" onclick="openModal('login')">
+        Customer Login
+      </button>
+    </div>
+  </section>
+
+
+  <section class="services">
+
+    <h2>Our Services</h2>
+
+    <div class="cards">
+
+      <div class="card">
+        <h3>💳 Digital Services</h3>
+        <p>
+          Access useful digital services from one convenient platform.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>💱 Currency Conversion</h3>
+        <p>
+          Convert Nigerian Naira to different international currencies.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>🌍 Global Services</h3>
+        <p>
+          Explore services designed for customers in Nigeria and other
+          countries.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>👤 Customer Account</h3>
+        <p>
+          Create your account and manage your services from your dashboard.
+        </p>
+      </div>
+
+    </div>
+
+  </section>
+
+</section>
+
+
+<!-- SIGNUP / LOGIN MODAL -->
+<div class="modal" id="accountModal">
+
+  <div class="modal-box">
+
+    <div class="close" onclick="closeModal()">×</div>
+
+    <!-- SIGNUP -->
+    <div id="signupForm">
+
+      <h2>Create Customer Account</h2>
+
+      <input
+        type="text"
+        id="signupName"
+        placeholder="Full Name"
+      >
+
+      <input
+        type="email"
+        id="signupEmail"
+        placeholder="Email Address"
+      >
+
+      <input
+        type="password"
+        id="signupPassword"
+        placeholder="Create Password"
+      >
+
+      <button
+        class="btn primary form-btn"
+        onclick="createAccount()"
+      >
+        Create Account
+      </button>
+
+      <div class="switch">
+        Already have an account?
+        <span onclick="showLogin()">Login</span>
+      </div>
+
+    </div>
+
+
+    <!-- LOGIN -->
+    <div id="loginForm" style="display:none;">
+
+      <h2>Customer Login</h2>
+
+      <input
+        type="email"
+        id="loginEmail"
+        placeholder="Email Address"
+      >
+
+      <input
+        type="password"
+        id="loginPassword"
+        placeholder="Password"
+      >
+
+      <button
+        class="btn primary form-btn"
+        onclick="login()"
+      >
+        Login
+      </button>
+
+      <div class="switch">
+        Don't have an account?
+        <span onclick="showSignup()">Create Account</span>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- CUSTOMER DASHBOARD -->
+<section id="dashboard">
+
+  <div class="dashboard-header">
+
+    <div>
+      <h1>Customer Dashboard</h1>
+      <p class="welcome" id="welcomeUser"></p>
+    </div>
+
+    <button class="btn secondary" onclick="logout()">
+      Logout
+    </button>
+
+  </div>
+
+
+  <div class="dashboard-grid">
+
+    <div class="dash-card">
+      <h3>👤 My Account</h3>
+      <p id="accountEmail"></p>
+    </div>
+
+    <div class="dash-card">
+      <h3>🌍 Global Services</h3>
+      <p>Explore available digital services.</p>
+    </div>
+
+    <div class="dash-card">
+      <h3>💱 Currency Converter</h3>
+      <p>Convert currencies quickly.</p>
+    </div>
+
+    <div class="dash-card">
+      <h3>📋 Transactions</h3>
+      <p>Your transaction history will appear here.</p>
+    </div>
+
+  </div>
+
+
+  <!-- CONVERTER -->
+  <div class="converter">
+
+    <h2>💱 Currency Converter</h2>
+
+    <input
+      type="number"
+      id="nairaAmount"
+      placeholder="Enter amount in Nigerian Naira"
+    >
+
+    <select id="currency">
+      <option value="0.00065">USD - US Dollar</option>
+      <option value="0.00056">EUR - Euro</option>
+      <option value="0.00048">GBP - British Pound</option>
+      <option value="0.00096">CAD - Canadian Dollar</option>
+      <option value="0.00086">AUD - Australian Dollar</option>
+    </select>
+
+    <button
+      class="btn primary"
+      onclick="convertCurrency()"
+    >
+      Convert
+    </button>
+
+    <div id="result"></div>
+
+  </div>
+
+</section>
+
+
+<footer>
+  © 2026 Soft Logs Global. All Rights Reserved.
+</footer>
+
+
+<script>
+
+  function openModal(type) {
+
+    document.getElementById("accountModal").style.display = "flex";
+
+    if (type === "login") {
+      showLogin();
+    } else {
+      showSignup();
+    }
+  }
+
+
+  function closeModal() {
+
+    document.getElementById("accountModal").style.display = "none";
+
+  }
+
+
+  function showSignup() {
+
+    document.getElementById("signupForm").style.display = "block";
+
+    document.getElementById("loginForm").style.display = "none";
+
+  }
+
+
+  function showLogin() {
+
+    document.getElementById("signupForm").style.display = "none";
+
+    document.getElementById("loginForm").style.display = "block";
+
+  }
+
+
+  function createAccount() {
+
+    const name =
+      document.getElementById("signupName").value.trim();
+
+    const email =
+      document.getElementById("signupEmail").value.trim();
+
+    const password =
+      document.getElementById("signupPassword").value;
+
+
+    if (!name || !email || !password) {
+
+      alert("Please fill in all fields.");
+
+      return;
+    }
+
+
+    if (password.length < 6) {
+
+      alert("Password must be at least 6 characters.");
+
+      return;
+    }
+
+
+    const user = {
+
+      name: name,
+
+      email: email,
+
+      password: password
+
+    };
+
+
+    localStorage.setItem(
+      "softLogsUser",
+      JSON.stringify(user)
+    );
+
+
+    alert("Account created successfully!");
+
+
+    document.getElementById("signupName").value = "";
+
+    document.getElementById("signupEmail").value = "";
+
+    document.getElementById("signupPassword").value = "";
+
+
+    showLogin();
+
+  }
+
+
+  function login() {
+
+    const email =
+      document.getElementById("loginEmail").value.trim();
+
+    const password =
+      document.getElementById("loginPassword").value;
+
+
+    const savedUser =
+      JSON.parse(localStorage.getItem("softLogsUser"));
+
+
+    if (!savedUser) {
+
+      alert("No account found. Please create an account first.");
+
+      return;
+    }
+
+
+    if (
+      email === savedUser.email &&
+      password === savedUser.password
+    ) {
+
+      closeModal();
+
+      document.getElementById("home").style.display = "none";
+
+      document.getElementById("dashboard").style.display = "block";
+
+      document.getElementById("welcomeUser").innerText =
+        "Welcome back, " + savedUser.name + "!";
+
+      document.getElementById("accountEmail").innerText =
+        savedUser.email;
+
+      window.scrollTo(0, 0);
+
+    } else {
+
+      alert("Incorrect email or password.");
+
+    }
+
+  }
+
+
+  function logout() {
+
+    document.getElementById("dashboard").style.display = "none";
+
+    document.getElementById("home").style.display = "block";
+
+    window.scrollTo(0, 0);
+
+  }
+
+
+  function convertCurrency() {
+
+    const amount =
+      parseFloat(document.getElementById("nairaAmount").value);
+
+    const rate =
+      parseFloat(document.getElementById("currency").value);
+
+    const currency =
+      document.getElementById("currency");
+
+    const currencyName =
+      currency.options[currency.selectedIndex].text.split(" - ")[0];
+
+
+    if (isNaN(amount) || amount <= 0) {
+
+      document.getElementById("result").innerText =
+        "Please enter a valid amount.";
+
+      return;
+    }
+
+
+    const converted = amount * rate;
+
+
+    document.getElementById("result").innerText =
+      "₦" + amount.toLocaleString() +
+      " ≈ " +
+      converted.toFixed(2) +
+      " " +
+      currencyName;
+
+  }
+
+</script>
+
+</body>
+</html>
